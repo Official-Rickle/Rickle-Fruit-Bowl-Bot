@@ -1,0 +1,8 @@
+> **Welcome to Rickle Fantasy Fruit Teams**
+> Pick a team to begin the fun. You can leave at anytime. 
+> Each Tournament consists of 4 rounds.
+> Each team member has the chance to pick 3 teams each round. 
+> **_THE ORDER MATTERS_**
+> The team members who choose the correct perdiction each round advance to the next round.
+> After 4 Rounds the team with the most correct perdictions will win the Tournament.
+> Good Luck!

@@ -1,3 +1,48 @@
+**Introducing The Rickle Fantasy Fruit Bowl**
+---
+
+As part of our on going effort to help people get into the Decentralized financial space we have come up with a tournament for the ages.
+
+Everyone, who plays will have a shot to Win some crypto.
+
+
+**Rewards**
+
+First place will be awarded 1000 Rickle and a Spin on the Rewards Wheel.
+
+Second Place will be awarded 500 Rickle.
+
+Third Place will be awarded 100 Rickle.
+
+Each month there will be :
+
+    1 First place Winner
+    2 Second Place Winners
+    3 Third Place Winners
+  
+**Step One _Choose your team_**
+
+There are 8 Teams to choose from.
+
+    1) :cherries:    🍒 The Cherries
+    2) :coconut:      🥥 The Coconuts
+    3) :watermelon:   🍉 The Melons
+    4) :pineapple:    🍍 The Pineapples
+    5) :kiwi:         🥝 The Kiwi's
+    6) :banana:       🍌 The Banana's
+    7) :tangerine:    🍊 The Tangerines
+    8) :blueberries:  🫐 The Blueberries
+
+**Step Two _Pick Your Choices for each Round_**
+
+There will be 4 rounds in each game. You can pick 3 choices, the order in which you pick them matters.
+The players who choose each round correctly advance on to the next round.
+
+The Players or Player who successfully makes it through will move on to the finally at the end of the year for a chance to Win 10000 Rickle for their team.
+
+---
+---
+
 **Basic Discord Bot**
 ---
 This repositiory is a template to create your own discord bot.
@@ -238,3 +283,41 @@ This is a list of the event files that come with the basic programs.
     --> 📄events\userUpdate.event.js
     --> 📄events\warn.event.js
     --> 📄events\webhookUpdate.event.js
+
+
+
+** Event Emitters
+createTournamentModal
+    tournamentNameInput
+    roundsInput
+    picksPerRoundInput
+    maxPlayersPerTeamInput
+roundRewardsButton
+  roundRewardsModal
+    roundRewardsFirstPlaceButton
+      prizeTypeInput
+      nameInput
+      amountInput
+      descriptionInput
+    roundRewardsSecondPlaceButton
+    roundRewardsThirdPlaceButton
+championsRewardsButton
+  championshipRewardsModal
+    championshipRewardsFirstPlaceButton
+    championshipRewardsSecondPlaceButton
+    championshipRewardsThirdPlaceButton
+
+
+createATeamButton
+
+createTeamModal
+  teamNameInput
+  teamSloganInput
+
+
+createATeamRoleButton
+setTeamRoleButton
+setAllowedTeamsButton
+setAllDoneButton
+
+cancelTournamentButton

@@ -12,7 +12,8 @@ const {
   Client,
   SlashCommandBuilder,
   Collection,
-  Routes
+  Routes,
+  EmbedBuilder
 } = require("discord.js");
 
 const options = {
@@ -51,7 +52,7 @@ class GenericDiscordBod {
   };
 
   //add the slash commands if they have not been added.
-  loadSlashCommands = (currentFolderPath) => {
+  loadSlashCommands = currentFolderPath => {
     console.log("Checking for Slash Commands.");
     const startPath = path.resolve(path.join(currentFolderPath, "commands"));
     if (!fs.existsSync(startPath)) {
@@ -63,7 +64,7 @@ class GenericDiscordBod {
 
     //check the global commands folder.
     if (fs.existsSync(path.join(startPath, "app"))) {
-        console.log("Loading Global Slash Commands.");
+      console.log("Loading Global Slash Commands.");
 
       const commandsPath = path.join(startPath, "app");
       const commandFiles = fs
@@ -77,18 +78,18 @@ class GenericDiscordBod {
       }
     }
 
-    if (fs.existsSync(path.join(startPath, "guild"))) { 
-        console.log("Loading Guild Slash Commands.");
-        const commandsPath = path.join(startPath, "guild");
-        const commandFiles = fs
-          .readdirSync(commandsPath)
-          .filter(file => file.endsWith(".command.js"));
+    if (fs.existsSync(path.join(startPath, "guild"))) {
+      console.log("Loading Guild Slash Commands.");
+      const commandsPath = path.join(startPath, "guild");
+      const commandFiles = fs
+        .readdirSync(commandsPath)
+        .filter(file => file.endsWith(".command.js"));
 
-        for (const file of commandFiles) {
-          const filePath = path.join(commandsPath, file);
-          const command = require(filePath);
-          botCommands.push(command);
-        }
+      for (const file of commandFiles) {
+        const filePath = path.join(commandsPath, file);
+        const command = require(filePath);
+        botCommands.push(command);
+      }
     }
 
     return botCommands;
@@ -125,7 +126,7 @@ class GenericDiscordBod {
       }
       if (interaction.options) {
         try {
-            this.optionBuilder(structuredCommand, interaction.options);
+          this.optionBuilder(structuredCommand, interaction.options);
         } catch (error) {
           console.error(error);
           throw Error("Command Option Initialization Error.");
@@ -312,6 +313,30 @@ class GenericDiscordBod {
     }
   };
 
+  buildEmbed({
+    author,
+    color,
+    title,
+    description,
+    fields,
+    image,
+    thumbnail,
+    url,
+    footer
+  }) {
+    const embed = new EmbedBuilder();
+    if (author) embed.setAuthor(author);
+    if (color) embed.setColor(color);
+    if (title) embed.setTitle(title);
+    if (description) embed.setDescription(description);
+    if (fields) embed.setFields(fields);
+    if (image) embed.setImage(image);
+    if (thumbnail) embed.setThumbnail(thumbnail);
+    if (url) embed.setURL(url);
+    if (footer) embed.setFooter(footer);
+    return embed;
+  }
+
   setUsername(username) {
     this._client.user.setUsername(username);
   }
@@ -319,11 +344,65 @@ class GenericDiscordBod {
     //console.log(clientId, permissionBits);
     return `https://discord.com/api/oauth2/authorize?client_id=${clientId}&scope=bot&permissions=${permissionBits}`;
   };
+
+  _events = {};
+  on(name, cb) {
+    if (!this._events[name]) {
+      this._events[name] = { callbacks: [] };
+    }
+    this._events[name].callbacks.push(cb);
+    this._events[name].runOnce = false;
+  }
+
+  once(name, cb) {
+    if (!this._events[name]) {
+      this._events[name] = { callbacks: [] };
+    }
+    this._events[name].callbacks.push(cb);
+    this._events[name].runOnce = true;
+  }
+
+  emit(name, args) {
+    if (!this._events[name]) {
+      console.log("Event %s not found.", name);
+      return;
+    }
+
+    if (!this._events[name].callbacks.length === 0) return;
+
+    const fireCallbacks = callback => {
+      if (typeof args === "object" && Array.isArray(args)) {
+        return callback(...args);
+      } else return callback(args);
+    };
+    for (let i = 0; i <= this._events[name].callbacks.length - 1; i++) {
+      const callback = this._events[name].callbacks.shift();
+      if (callback) {
+        if (!this._events[name].runOnce) {
+          this._events[name].callbacks.push(callback);
+        }
+        return fireCallbacks(callback);
+      }
+    }
+    return;
+  }
+
+  removeEvent(name) {
+    if (this._events.hasOwnProperty(name)) {
+      try {
+        delete this._events[name];
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+    return false;
+  }
 }
 async function main() {
   const GenericBot = new GenericDiscordBod();
   await GenericBot.login();
-  GenericBot.setUsername("! GenericBot");
+  GenericBot.setUsername("! RickleFuitBowl");
 
   console.log(
     "Invite Your Bot :: ",

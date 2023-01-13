@@ -1,0 +1,5 @@
+> **Create A Team**
+> Creating a team is the first step in organizing a tournament.
+> To begin click Create Team Below, or Cancel to end this interaction.
+> Each team can have {TEAM_PLAYER_LIMIT} players on it.
+> Good Luck!

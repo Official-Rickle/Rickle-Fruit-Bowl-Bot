@@ -1,0 +1,4 @@
+> **Choose A Team**
+> Choose the team that you want to be apart of, you will need to stay on the team for the full tournament to earn rewards.
+> You can leave a team at any time by using the `/teams leave` Slash command.
+> React below with the emoji for the team you would like to join. Good Luck!

@@ -1,0 +1,52 @@
+{
+  "step": "allDone",
+  "roundRewards": {
+    "complete": false,
+    "firstPlace": {
+      "type": "t",
+      "name": "brkl",
+      "amount": "10",
+      "description": "10 brkl each"
+    },
+    "secondPlace": {
+      "type": "t",
+      "name": "brkl",
+      "amount": "5",
+      "description": "5 brkl each"
+    },
+    "thirdPlace": {
+      "type": "t",
+      "name": "brkl",
+      "amount": "1",
+      "description": "1 brkl each"
+    }
+  },
+  "championshipRewards": {
+    "complete": false,
+    "firstPlace": {
+      "type": "t",
+      "name": "brkl",
+      "amount": "100",
+      "description": "100 brkl each"
+    },
+    "secondPlace": {
+      "type": "t",
+      "name": "brkl",
+      "amount": "50",
+      "description": "50 brkl each"
+    },
+    "thirdPlace": {
+      "type": "t",
+      "name": "brkl",
+      "amount": "25",
+      "description": "25 brkl each"
+    }
+  },
+  "tournamentUID": "91cb8a17-b317-4818-9f4a-da495d179f5f",
+  "tournamentName": "Rickle Fantasy Fruit Bowl I",
+  "rounds": "4",
+  "picksPerRound": "5",
+  "maxPlayersPerTeam": "25",
+  "category": "championship",
+  "previousStep": "thirdPlace"
+}

@@ -10,12 +10,12 @@ module.exports = {
     {
       name: "in",
       description:
-        "Enable the Reactdrop Role. Opt In to notifications and pings."
+        `Enable the ${process.env.OPT_ROLE} Role. Opt In to notifications and pings.`
     },
     {
       name: "out",
       description:
-        "Disable the Reactdrop Role. Opt Out of notifications and pings."
+        `Disable the ${process.env.OPT_ROLE} Role. Opt Out of notifications and pings.`
     }
   ],
   dm_permission: false,
@@ -36,11 +36,11 @@ module.exports = {
 
     const GuildRoles = await currentGuild.roles.fetch();
     
-    const ReactDropRole = GuildRoles.filter(
-      r => r.name === "ReactDrop"
+    const optRole = GuildRoles.filter(
+      r => r.name === process.env.OPT_ROLE
     ).first();
 
-    if(!ReactDropRole) {
+    if(!optRole) {
       GuildRoles.create({
         name: process.env.OPT_ROLE,
         color: process.env.OPT_COLOR,
@@ -52,10 +52,10 @@ module.exports = {
     }
     const currentGuildMember = await currentGuild.members.fetch(interaction.user.id);
     const memberHasRole = await currentGuildMember.roles.cache.has(
-      ReactDropRole.id
+      optRole.id
     );
 
-    //console.log("React",  ReactDropRole, "Member", MemberRoles);
+    //console.log("React",  optRole, "Member", MemberRoles);
     if (interaction.options._subcommand === "in") {
       let userOptCurrentState = "out";
       if (!userOptState.has(interaction.user.id)) {
@@ -74,11 +74,11 @@ module.exports = {
 
       if (!memberHasRole) {
         console.log("Role Not Found.");
-        await currentGuildMember.roles.add(ReactDropRole.id);
+        await currentGuildMember.roles.add(optRole.id);
       }
       await wait(2000);
       await interaction.editReply(
-        "You have been opted in. You will be pinged by the reactdrop role."
+        `You have been opted in. You will be pinged by the ${process.env.OPT_ROLE} role.`
       );
     }
     if (interaction.options._subcommand === "out") {
@@ -99,11 +99,11 @@ module.exports = {
 
       if (memberHasRole) {
         console.log("Role Found.");
-        await currentGuildMember.roles.remove(ReactDropRole.id);
+        await currentGuildMember.roles.remove(optRole.id);
       }
       await wait(2000);
       await interaction.editReply(
-        "You have been opted out. You will no longer be pinged by the reactdrop role."
+        `You have been opted out. You will no longer be pinged by the ${process.env.OPT_ROLE} role.`
       );
     }
   }

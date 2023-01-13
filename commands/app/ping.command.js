@@ -9,6 +9,6 @@ module.exports = {
   async execute() {
     const [interaction, ...rest] = arguments;
     console.log(interaction, rest);
-    return interaction.reply("Ping!");
+    return interaction.reply("Ping!" + `: ${this._client.ws.ping}ms.`);
   }
 };

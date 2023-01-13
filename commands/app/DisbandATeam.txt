@@ -1,0 +1,4 @@
+> **Disband A Team**
+> Only the founder may disband a team.
+> To disband a team click the button below to open the Disband Team Model or click cancel to end this interaction.
+> Good Luck!
